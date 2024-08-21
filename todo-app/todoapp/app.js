@@ -3,10 +3,23 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const cookieSession = require("cookie-session");
+const secret = "secretCuisine123"
 
 const indexRouter = require('./routes/index');
 
 const app = express();
+
+//Cookieとsessionを使用するための処理
+app.use(
+  cookieSession({
+    name: "session",
+    keys: [secret],
+
+    //cookieoptions
+    maxAge: 24 * 60 * 60 * 1000, //24 hours
+  })
+);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
