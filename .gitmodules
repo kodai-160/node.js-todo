@@ -1,0 +1,3 @@
+[submodule "username-password-tutorial"]
+	path = username-password-tutorial
+	url = https://github.com/passport/todos-express-starter.git
