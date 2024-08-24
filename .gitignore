@@ -2,3 +2,14 @@ todo-app/todo-app/node_modules/
 todo-app/todo-app/package-lock.json
 todo-app/todo-app/package.json
 todo-app/todo-app/bin/www
+
+# tutorial
+.env
+var
+
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Mac OS X
+.DS_Store
