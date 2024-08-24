@@ -31,6 +31,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//authorazation
+const passConfig = require("./config/passport");
+passConfig(app);
+
+//routes
 app.use('/', require('./routes'));
 
 // catch 404 and forward to error handler

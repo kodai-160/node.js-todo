@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const knex = require("../db/knex")
-const bcrypt = require("bcrypt");
+const passport = require("passport");
 
 router.get('/', function (req, res, next) {
     const userId = req.session.userid;
@@ -12,41 +11,25 @@ router.get('/', function (req, res, next) {
     });
 });
 
-router.post('/', function (req, res, next) {
-    const userId = req.session.userid;
-    const isAuth = Boolean(userId);
-    const username = req.body.username;
-    const password = req.body.password;
-    knex("users")
-    .where({
-        name: username,
-    })
-    .select("*")
-    .then(async function (results) {
-        if(results.length === 0) {
-            res.render("signin", {
-                title: "Sign in",
-                errorMessage: ["ユーザが見つかりません"],
-                isAuth: isAuth,
+router.post('/', passport.authenticate('local', (err, user, info) => {
+    router.post('/', (req, res, next) => {
+        passport.authenticate('local', (err, user, info) => {
+            if (err) { 
+                return next(err); 
+            }
+            if (!user) {
+                return res.redirect('/signin'); 
+            }
+            req.logIn(user, (err) => {
+                if (err) { 
+                    return next(err); 
+                }
+                console.log('Session after login:', req.session);
+                req.session.userid = user.id;
+                return res.redirect('/');
             });
-        } else if (await bcrypt.compare(password, results[0].password)) {
-            req.session.userid = results[0].id;
-            res.redirect('/');
-        } else {
-            res.render("signin", {
-                title: "Sign in",
-                errorMessage: ["ユーザが見つかりません"],
-        });
-    }
-    })
-    .catch(function (err) {
-        console.error(err);
-        res.render("signin", {
-            title: "Sign in",
-            errorMessage: [err.sqlMessage],
-            isAuth: isAuth,
-        });
+        })(req, res, next); // req, res, next を渡す
     });
-});
+})); 
 
 module.exports = router;
