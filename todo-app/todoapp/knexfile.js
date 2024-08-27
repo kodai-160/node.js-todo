@@ -4,7 +4,7 @@ module.exports = {
     connection: {
       host: "localhost",
       user: "root",
-      password: "password",
+      password: "kodaiadvance",
       database: "todo_app",
     },
     pool:{
@@ -18,7 +18,7 @@ module.exports = {
     connection: {
       host: "localhost",
       user: "root",
-      password: "password",
+      password: "kodaiadvance",
       database: "todo_app",
     },
     pool: {
@@ -32,7 +32,7 @@ module.exports = {
     connection: {
       host: "localhost",
       user: "root",
-      password: "password",                                            
+      password: "kodaiadvance",                                            
       database: "todo_app",
     },
     pool: {

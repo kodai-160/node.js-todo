@@ -2,6 +2,9 @@ todo-app/todo-app/node_modules/
 todo-app/todo-app/package-lock.json
 todo-app/todo-app/package.json
 todo-app/todo-app/bin/www
+node_modules
+package-lock.json
+package.json
 
 # tutorial
 .env
